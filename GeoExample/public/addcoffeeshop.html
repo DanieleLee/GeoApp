@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title>커피숍 추가 테스트</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        input{
+            width: 160px;
+        }
+        
+        #addr{
+            width: 250px;
+        }
+    
+    
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>    
+        $(document).ready(function(){    
+            $('#mapLoad').on('click',function(){
+                
+                self.location='/process/mapload';   
+            });    
+        
+        
+           function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        
+            var lat=getParameterByName('lat');
+            var lng=getParameterByName('lng');
+            var addr=getParameterByName('addr');
+            
+            if(lat){
+                
+               $('#addr').attr('value',addr);
+                $('#lng').attr('value',lng);
+                $('#lat').attr('value',lat);
+            }
+        });
+    </script>
+</head>
+<body>
+    
+  <div class="container">
+   <div class="page-header text-center">
+    <h1>커피숍 추가</h1>
+    <br>
+    <h3>구글맵 API를활용해서 커피숍을 추가합니다.</h3>
+    </div>
+    <br>
+    <div class="row">
+		
+        <div class="col-sm-6">
+		  <div class="well">
+    
+            <div><button id="mapLoad">커피숍 위치 선택하기</button></div>
+            <br>
+            <form method="post" action="/process/addcoffeeshop">
+                <table>
+                   <tr>
+                        <td><label>이름</label></td>
+                        <td><input type="text" name="name" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>주소</label></td>
+                        <td><input type="text" id='addr' name="address" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>전화번호</label></td>
+                        <td><input type="text" name="tel" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>경도</label></td>
+                        <td><input type="text" id='lng' name="longitude" placeholder="커피숍위치추가 버튼클릭"  value=""  readonly/></td>
+                    </tr>
+                    <tr>
+                        <td><label>위도</label></td>
+                        <td><input type="text" id='lat' name="latitude" placeholder="커피숍위치추가 버튼클릭"  value="" readonly /></td>
+                    </tr>
+
+                </table>
+                <input type="submit" value="전송" name="" />
+
+            </form>
+
+        </div>
+     </div>
+    </div>
+ </div>
+</body>
+</html>

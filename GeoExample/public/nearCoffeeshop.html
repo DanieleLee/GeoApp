@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <title> 가까운 커피숍 찾기</title>
+     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>    
+        $(document).ready(function(){    
+           
+        
+        
+           function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+        
+            var lat=getParameterByName('lat');
+            var lng=getParameterByName('lng');
+            
+            
+            if(lat){
+               
+                $('#lng').attr('value',lng);
+                $('#lat').attr('value',lat);
+            }
+        });
+    </script>
+</head>
+<body>
+ <div class="container">
+   <div class="page-header text-center">
+    <h1>가까운 커피숍 찾기</h1>
+    <br>
+   </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+		  <div class="well">
+    <form method="post" action="/process/nearcoffeeshop">
+        <table>
+            <tr>
+                <td><label>경도</label></td>
+                <td><input type="text" name="longitude" value="127.0632954"></td>
+            </tr>
+            <tr>
+                <td><label>위도</label></td>
+                <td><input type="text" name="latitude" value="37.5079523"></td>
+            </tr>
+        </table>
+        <input type="submit" value="전송" name="">
+    </form>
+   </div> 
+  </div>
+ </div>   
+</div>
+</body>
+</html>
